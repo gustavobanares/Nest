@@ -24,13 +24,13 @@ Content-Type: application/json
 
 ###
 
-# @name creat_question
+# @name create_question
 POST {{baseUrl}}/questions
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Nova pergunta 2",
+    "title": "Nova pergunta 3",
     "content": "Conteudo da pergunta"
 }
 
