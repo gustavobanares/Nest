@@ -9,6 +9,11 @@ import { PrismaAnswerCommentsRepository } from "./repositories/prisma-answer-com
 import { PrismaAnswerAttachmentsRepository } from "./repositories/prisma-answer-attachments-repository";
 import { StudentsRepository } from "@/domain/forum/application/repositories/students-repository";
 import { PrismaStudentsRepository } from "./repositories/prisma-students-repository";
+import { AnswerAttachmentsRepository } from "@/domain/forum/application/repositories/answer-attachments-repository";
+import { AnswerCommentsRepository } from "@/domain/forum/application/repositories/answer-comments-repository";
+import { AnswersRepository } from "@/domain/forum/application/repositories/answers-repository";
+import { QuestionAttachmentsRepository } from "@/domain/forum/application/repositories/question-attachments-repository";
+import { QuestionCommentsRepository } from "@/domain/forum/application/repositories/question-comments-repository";
 
 @Module({
   providers: [
@@ -22,21 +27,36 @@ import { PrismaStudentsRepository } from "./repositories/prisma-students-reposit
       provide: StudentsRepository,
       useClass: PrismaStudentsRepository,
     },
-    PrismaQuestionCommentsRepository,
-    PrismaQuestionAttachmentsRepository,
-    PrismaAnswersRepository,
-    PrismaAnswerCommentsRepository, // Adicionado
-    PrismaAnswerAttachmentsRepository, // Adicionado
+    {
+      provide: QuestionCommentsRepository,
+      useClass: PrismaQuestionCommentsRepository,
+    },
+    {
+      provide: QuestionAttachmentsRepository,
+      useClass: PrismaQuestionAttachmentsRepository,
+    },
+    {
+      provide: AnswersRepository,
+      useClass: PrismaAnswersRepository,
+    },
+    {
+      provide: AnswerCommentsRepository,
+      useClass: PrismaAnswerCommentsRepository,
+    },
+    {
+      provide: AnswerAttachmentsRepository,
+      useClass: PrismaAnswerAttachmentsRepository,
+    },
   ],
   exports: [
     PrismaService,
     QuestionsRepository,
     StudentsRepository,
-    PrismaQuestionCommentsRepository,
-    PrismaQuestionAttachmentsRepository,
-    PrismaAnswersRepository,
-    PrismaAnswerCommentsRepository,
-    PrismaAnswerAttachmentsRepository,
+    QuestionCommentsRepository,
+    QuestionAttachmentsRepository,
+    AnswersRepository,
+    AnswerCommentsRepository,
+    AnswerAttachmentsRepository,
   ],
 })
 export class DatabaseModule {}
