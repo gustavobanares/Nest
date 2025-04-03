@@ -10,7 +10,7 @@ export interface AnswerProps {
   content: string;
   attachments: AnswerAttachmentList;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 }
 
 export class Answer extends AggregateRoot<AnswerProps> {
@@ -69,7 +69,7 @@ export class Answer extends AggregateRoot<AnswerProps> {
       id?.toString()
     );
 
-    const isNewAnswer = !id
+    const isNewAnswer = !id;
 
     if (isNewAnswer) {
       answer.addDomainEvent(new AnswerCreatedEvent(answer));
