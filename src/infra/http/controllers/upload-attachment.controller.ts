@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Controller,
   FileTypeValidator,
   MaxFileSizeValidator,
@@ -11,7 +10,7 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller("/attachments")
-export class GetQuestionBySlugController {
+export class UploadAttachmentController {
   // constructor() {}
 
   @Post()
