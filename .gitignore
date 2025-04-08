@@ -6,6 +6,7 @@
 
 # Evn
 .env
+.env.test
 
 #Docker
 data
