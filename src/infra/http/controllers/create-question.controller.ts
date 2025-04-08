@@ -3,11 +3,8 @@ import {
   Body,
   Controller,
   Post,
-  Req,
-  UseGuards,
 } from "@nestjs/common";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
-import { JwtAuthGuard } from "@/infra/auth/jwt-auth.guard";
 import { UserPayLoad } from "@/infra/auth/jwt.strategy";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
 import { z } from "zod";
