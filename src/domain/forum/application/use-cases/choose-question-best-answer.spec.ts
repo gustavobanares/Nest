@@ -8,21 +8,29 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { NotAllowedError } from "@/core/errors/not-allowed-error";
 import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachments-repository";
 import { InMemoryQuestionAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository";
+import { InMemoryAttachmentsRepository } from "test/repositories/in-memory-attachments-repository";
+import { InMemoryStudentsRepository } from "test/repositories/in-memory-students-repository";
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository;
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let sut: ChooseQuestionBestAnswerUseCase;
 
 describe("Choose Question Best Answer", () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository();
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository();
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository();
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
-      inMemoryQuestionAttachmentsRepository
+      inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository
     );
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository

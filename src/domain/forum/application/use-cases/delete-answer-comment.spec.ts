@@ -4,13 +4,18 @@ import { makeAnswerComment } from "test/factories/make-answer-comment";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { beforeEach, describe, expect, it } from "vitest";
 import { NotAllowedError } from "@/core/errors/not-allowed-error";
+import { InMemoryStudentsRepository } from "test/repositories/in-memory-students-repository";
 
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository;
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let sut: DeleteAnswerCommentUseCase;
 
 describe("Delete Answer Comment", () => {
   beforeEach(() => {
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository();
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository
+    );
 
     sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentsRepository);
   });
@@ -18,7 +23,10 @@ describe("Delete Answer Comment", () => {
   it("should be able to delete a answer comment", async () => {
     const answerComment = makeAnswerComment();
 
-    await inMemoryAnswerCommentsRepository.create(answerComment);
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository
+    );
 
     await sut.execute({
       answerCommentId: answerComment.id.toString(),
